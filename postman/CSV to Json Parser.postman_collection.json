@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "0c466e97-815b-4212-9f97-87e2bca1dd5c",
+		"name": "CSV to Json Parser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Parse",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"CSV to JSON response OK\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});",
+							"",
+							"pm.test(\"CSV to JSON content string\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson[0]).to.eql({col1:\"val1.1\",col2:\"val1.2\"});",
+							"});",
+							"pm.test(\"CSV to JSON content int\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson[2]).to.eql({col1:3,col2:32});",
+							"});",
+							"pm.test(\"CSV to JSON content float\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson[3]).to.eql({col1:4.1,col2:4.23});",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csv",
+							"type": "file",
+							"src": "test.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/csv2json/parser",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"csv2json",
+						"parser"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "127.0.0.1:8000",
+			"type": "default"
+		}
+	]
+}
