@@ -31,6 +31,9 @@ Upload a CSV file and return JSON response with data read from CSV.
         ```
 4. Or install web server for production environment.
 
+## Postman
+
+In the /postman directory you can find the collection containing the API request with its respective tests. To pass the tests, use the file test.csv in the postman directory.
 
 ## Stack
 
