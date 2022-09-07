@@ -8,10 +8,24 @@ class CsvToJson
     private string $separator;
     private string $newline;
 
-    public function __construct(string $csv, string $separator = ";", string $newline = "\n")
+    public function __construct()
+    {
+        $this->separator = ";";
+        $this->newline = "\n";
+    }
+
+    public function setcsv(string $csv): void
     {
         $this->csv = $csv;
+    }
+
+    public function setseparator(string $separator): void
+    {
         $this->separator = $separator;
+    }
+
+    public function setnewline(string $newline): void
+    {
         $this->newline = $newline;
     }
 
@@ -21,21 +35,25 @@ class CsvToJson
         return json_encode($arrayData);
     }
 
-    private function csvToArray()
+    private function csvToArray(): array
     {
         $data = [];
-        $rows = explode($this->newline,$this->csv);
+        $rows = explode($this->newline, $this->csv);
 
         $titles = false;
-        foreach ($rows as $i => $row) {
-            if(!$titles){
-                $titles = explode($this->separator,$row);
+        foreach ($rows as $row) {
+            if (!$titles) {
+                $titles = explode($this->separator, $row);
                 continue;
             }
-            $fields = explode($this->separator,$row);
+            $fields = explode($this->separator, $row);
             $arrayRow = [];
             foreach ($fields as $key => $field) {
-                $arrayRow[$titles[$key]] = $field;
+                if (is_numeric($field)) {
+                    $arrayRow[$titles[$key]] = floatval($field);
+                } else {
+                    $arrayRow[$titles[$key]] = $field;
+                }
             }
             $data[] = $arrayRow;
         }
