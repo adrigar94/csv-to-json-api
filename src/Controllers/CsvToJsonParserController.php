@@ -35,4 +35,14 @@ class CsvToJsonParserController
         $json = $this->csv_to_json_service->__invoke();
         return new JsonResponse($json, 200, [], true);
     }
+
+
+    #[Route('/status', name: 'csv_to_json_parser', methods: ['GET'])]
+    public function status(): JsonResponse
+    {
+        $json = json_encode([
+            'success' => true
+        ]);
+        return new JsonResponse($json, 200, [], true);
+    }
 }
