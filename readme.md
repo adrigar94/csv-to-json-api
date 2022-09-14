@@ -23,6 +23,7 @@ Upload a CSV file and return JSON response with data read from CSV.
     - go to project directory
     -   ```shell
         php bin/phpunit
+        vendor/bin/behat
         ```
 3. Init development server
     - ```shell
