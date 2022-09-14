@@ -2,7 +2,7 @@
 
 namespace App\Tests\CsvToJson;
 
-use App\CsvToJson;
+use App\Services\CsvToJson;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CsvToJsonTest extends KernelTestCase
