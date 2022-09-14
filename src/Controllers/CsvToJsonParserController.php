@@ -12,10 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class CsvToJsonParserController
 {
 
-    public function __construct()
-    {
-    }
-
     #[Route('/csv2json/parser', name: 'csv_to_json_parser', methods: ['POST'])]
     public function parser(Request $request): JsonResponse
     {
@@ -30,9 +26,11 @@ class CsvToJsonParserController
                 'message' => 'file missing'
             ]),200,[],true);
         }
-        $csv = new Csv($csv_file,';');
+
+        $csv = new Csv($csv_content,';');
         $csv_to_json_service->setcsv($csv);
         $json = $csv_to_json_service();
+        
         return new JsonResponse($json, 200, [], true);
     }
 }
