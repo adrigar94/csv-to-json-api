@@ -2,61 +2,31 @@
 
 namespace App\Services;
 
+use App\Entities\Csv;
+use Exception;
+
 class CsvToJson
 {
-    private string $csv;
-    private string $separator;
-    private string $newline;
+    private Csv $csv;
 
-    public function __construct()
-    {
-        $this->separator = ";";
-        $this->newline = "\n";
+    public function __construct() {
     }
 
-    public function setcsv(string $csv): void
+    public function setcsv(Csv $csv): void
     {
         $this->csv = $csv;
     }
 
-    public function setseparator(string $separator): void
-    {
-        $this->separator = $separator;
-    }
-
-    public function setnewline(string $newline): void
-    {
-        $this->newline = $newline;
-    }
-
     public function __invoke(): string
     {
-        $arrayData = $this->csvToArray();
-        return json_encode($arrayData);
+        return $this->parseToJson();
     }
 
-    private function csvToArray(): array
+    public function parseToJson(): string
     {
-        $data = [];
-        $rows = explode($this->newline, $this->csv);
-
-        $titles = false;
-        foreach ($rows as $row) {
-            if (!$titles) {
-                $titles = explode($this->separator, $row);
-                continue;
-            }
-            $fields = explode($this->separator, $row);
-            $arrayRow = [];
-            foreach ($fields as $key => $field) {
-                if (is_numeric($field)) {
-                    $arrayRow[$titles[$key]] = floatval($field);
-                } else {
-                    $arrayRow[$titles[$key]] = $field;
-                }
-            }
-            $data[] = $arrayRow;
+        if(!$this->csv){
+            throw new Exception("CSV is missing");
         }
-        return $data;
+        return json_encode($this->csv->getRowsInArray());
     }
 }

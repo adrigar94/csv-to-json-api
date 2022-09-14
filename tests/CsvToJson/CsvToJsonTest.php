@@ -2,6 +2,7 @@
 
 namespace App\Tests\CsvToJson;
 
+use App\Entities\Csv;
 use App\Services\CsvToJson;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -28,7 +29,7 @@ class CsvToJsonTest extends KernelTestCase
     public function test_it_should_parse_csv_to_json($csvToParse,$jsonExpected): void
     {
         $csvToJson = new CsvToJson();
-        $csvToJson->setcsv($csvToParse);
+        $csvToJson->setcsv(new Csv($csvToParse,';'));
         $jsonResponse = $csvToJson();
         
         $this->assertEquals($jsonExpected, $jsonResponse, "Parse int to JSON");

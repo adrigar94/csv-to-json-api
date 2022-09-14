@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Entities\Csv;
 use App\Services\CsvToJson;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,16 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class CsvToJsonParserController
 {
 
-    private CsvToJson $csv_to_json_service;
-
     public function __construct()
     {
-        $this->csv_to_json_service = new CsvToJson();
     }
 
     #[Route('/csv2json/parser', name: 'csv_to_json_parser', methods: ['POST'])]
     public function parser(Request $request): JsonResponse
     {
+        $csv_to_json_service = new CsvToJson();
+
         $csv_file = $request->files->get('csv');
         if ($csv_file and $csv_file instanceof UploadedFile) {
             $csv_content = file_get_contents($csv_file->getPathname());
@@ -30,8 +30,9 @@ class CsvToJsonParserController
                 'message' => 'file missing'
             ]),200,[],true);
         }
-        $this->csv_to_json_service->setcsv($csv_content);
-        $json = $this->csv_to_json_service->__invoke();
+        $csv = new Csv($csv_file,';');
+        $csv_to_json_service->setcsv($csv);
+        $json = $csv_to_json_service();
         return new JsonResponse($json, 200, [], true);
     }
 }
