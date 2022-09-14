@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\CsvToJson;
-use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,20 +28,10 @@ class CsvToJsonParserController
             return new JsonResponse(json_encode([
                 'status' => 'error',
                 'message' => 'file missing'
-            ]));
+            ]),200,[],true);
         }
         $this->csv_to_json_service->setcsv($csv_content);
         $json = $this->csv_to_json_service->__invoke();
-        return new JsonResponse($json, 200, [], true);
-    }
-
-
-    #[Route('/status', name: 'csv_to_json_parser', methods: ['GET'])]
-    public function status(): JsonResponse
-    {
-        $json = json_encode([
-            'success' => true
-        ]);
         return new JsonResponse($json, 200, [], true);
     }
 }
