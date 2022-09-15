@@ -22,11 +22,6 @@ class Csv
         $this->csvToRows();
     }
 
-    public function getHeader(): array
-    {
-        return $this->header;
-    }
-
     public function getRowsInArray(): array
     {
         return $this->rows;
