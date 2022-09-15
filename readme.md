@@ -14,6 +14,7 @@ Upload a CSV file and return JSON response with data read from CSV.
 
 | Method | Path             | Parameters                 |
 |--------|------------------|----------------------------|
+| GET    | /status          | none                       |
 | POST   | /csv2json/parser | [ [name:csv, value:file] ] |
 
 ## Installation
