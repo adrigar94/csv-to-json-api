@@ -4,6 +4,7 @@ namespace App\Tests\CsvToJson;
 
 use App\Entities\Csv;
 use App\Services\CsvToJson;
+use App\Tests\CsvMother;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CsvToJsonTest extends KernelTestCase
@@ -22,6 +23,12 @@ class CsvToJsonTest extends KernelTestCase
         ];
     }
 
+    public function test_it_should_create_csv(): void
+    {
+        $csv = CsvMother::create();
+        $this->assertInstanceOf(Csv::class, $csv);
+    }
+
 
     /**
      * @dataProvider csvProvider
@@ -29,7 +36,7 @@ class CsvToJsonTest extends KernelTestCase
     public function test_it_should_parse_csv_to_json($csvToParse,$jsonExpected): void
     {
         $csvToJson = new CsvToJson();
-        $csvToJson->setcsv(new Csv($csvToParse,';'));
+        $csvToJson->setcsv(CsvMother::create($csvToParse,';'));
         $jsonResponse = $csvToJson();
         
         $this->assertEquals($jsonExpected, $jsonResponse, "Parse int to JSON");
