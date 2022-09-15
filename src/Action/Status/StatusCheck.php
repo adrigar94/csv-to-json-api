@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Action;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StatusController
+class StatusCheck
 {
 
     #[Route('/status', name: 'check_status', methods: ['GET'])]

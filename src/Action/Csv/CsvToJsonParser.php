@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Action\Csv;
 
 use App\Domain\Csv\Domain\Csv;
 use App\Domain\Csv\Application\CsvToJson;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CsvToJsonParserController
+class CsvToJsonParser
 {
 
     #[Route('/csv2json/parser', name: 'csv_to_json_parser', methods: ['POST'])]
