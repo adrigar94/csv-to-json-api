@@ -4,6 +4,7 @@ namespace App\Tests\Domain\Csv\Application\CsvToJson;
 
 use App\Domain\Csv\Domain\Csv;
 use App\Domain\Csv\Application\CsvToJson;
+use App\Domain\Csv\Domain\Exceptions\MissingCsvException;
 use App\Tests\Domain\Csv\Domain\CsvMother;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -21,6 +22,13 @@ class CsvToJsonTest extends KernelTestCase
                 '[{"col1":1,"col2":2},{"col1":1.1,"col2":2.2}]'
             ],
         ];
+    }
+
+    public function test_it_should_exception_if_file_is_missing(): void
+    {
+        $csvToJson = new CsvToJson();
+        $this->expectExceptionObject(new MissingCsvException());
+        $csvToJson();
     }
 
     public function test_it_should_create_csv(): void

@@ -3,7 +3,7 @@
 namespace App\Domain\Csv\Application;
 
 use App\Domain\Csv\Domain\Csv;
-use Exception;
+use App\Domain\Csv\Domain\Exceptions\MissingCsvException;
 
 class CsvToJson
 {
@@ -24,8 +24,8 @@ class CsvToJson
 
     public function parseToJson(): string
     {
-        if(!$this->csv){
-            throw new Exception("CSV is missing");
+        if(!isset($this->csv)){
+            throw new MissingCsvException();
         }
         return json_encode($this->csv->getRowsInArray());
     }
