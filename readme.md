@@ -42,6 +42,13 @@ In the /postman directory you can find the collection containing the API request
 - PHP 8.1
 - Symfony 6.1
 
+## Coverage
+
+Commnad for generate html coverage:
+```shell
+XDEBUG_MODE=coverage php bin/phpunit --coverage-html coverage
+```
+
 ## License 
 
 [MIT](https://opensource.org/licenses/MIT)
