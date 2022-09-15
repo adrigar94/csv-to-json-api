@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Entities\Csv;
-use App\Services\CsvToJson;
+use App\Domain\Csv\Domain\Csv;
+use App\Domain\Csv\Application\CsvToJson;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

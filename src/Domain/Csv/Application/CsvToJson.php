@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Domain\Csv\Application;
 
-use App\Entities\Csv;
+use App\Domain\Csv\Domain\Csv;
 use Exception;
 
 class CsvToJson

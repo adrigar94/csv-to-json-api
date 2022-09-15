@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\CsvToJson;
+namespace App\Tests\Domain\Csv\Application\CsvToJson;
 
-use App\Entities\Csv;
-use App\Services\CsvToJson;
-use App\Tests\CsvMother;
+use App\Domain\Csv\Domain\Csv;
+use App\Domain\Csv\Application\CsvToJson;
+use App\Tests\Domain\Csv\Domain\CsvMother;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CsvToJsonTest extends KernelTestCase

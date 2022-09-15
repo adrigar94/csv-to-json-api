@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Domain\Csv\Domain;
 
-use App\Entities\Csv;
+use App\Domain\Csv\Domain\Csv;
 
 final class CsvMother
 {
