@@ -42,6 +42,14 @@ class CsvContext implements Context
     }
 
     /**
+     * @Given I don't have a CSV file
+     */
+    public function iDontHaveACsvFile()
+    {
+        $this->csv = null;
+    }
+
+    /**
      * @When I request a parse CSV file from :url
      */
     public function iRequestAParseCsvFileFrom($url)
@@ -67,13 +75,13 @@ class CsvContext implements Context
     public function theResultIsASuccessJsonResponse()
     {
         $this->contentResponse = $this->response->getBody()->getContents();
-        if(!$this->isJson($this->contentResponse)){
+        if (!$this->isJson($this->contentResponse)) {
             throw new Exception("Isn't a JSON response");
         }
         $this->jsonResponse = json_decode($this->contentResponse);
 
-        if(isset($this->jsonResponse->status) AND $this->jsonResponse->status == "error"){
-            throw new Exception("Error on parse JSON" . (isset($this->jsonResponse->message) ? " - ".$this->jsonResponse->message : ''));
+        if (isset($this->jsonResponse->status) and $this->jsonResponse->status == "error") {
+            throw new Exception("Error on parse JSON" . (isset($this->jsonResponse->message) ? " - " . $this->jsonResponse->message : ''));
         }
     }
 
@@ -90,6 +98,25 @@ class CsvContext implements Context
         return $this->jsonResponse == json_decode(file_get_contents($path_file));
     }
 
+    /**
+     * @Then The result is a error JSON response
+     */
+    public function theResultIsAErrorJsonResponse()
+    {
+        $this->contentResponse = $this->response->getBody()->getContents();
+        if (!$this->isJson($this->contentResponse)) {
+            throw new Exception("Isn't a JSON response");
+        }
+        $this->jsonResponse = json_decode($this->contentResponse);
+
+        if (!isset($this->jsonResponse->status) or $this->jsonResponse->status != "error") {
+            throw new Exception("Error is required when CSV file is missing");
+        }
+    }
+
+    /**
+     * Check if a string is a json encoded
+     */
     private function isJson($string)
     {
         json_decode($string);
