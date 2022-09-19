@@ -5,7 +5,7 @@ namespace App\Api;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StatusCheck
+class StatusCheckController
 {
 
     #[Route('/status', name: 'check_status', methods: ['GET'])]

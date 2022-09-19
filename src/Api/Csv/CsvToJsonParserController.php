@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CsvToJsonParser
+class CsvToJsonParserController
 {
 
     #[Route('/csv2json/parser', name: 'csv_to_json_parser', methods: ['POST'])]
