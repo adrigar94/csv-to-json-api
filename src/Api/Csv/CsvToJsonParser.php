@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action\Csv;
+namespace App\Api\Csv;
 
 use App\Domain\Csv\Domain\Csv;
 use App\Domain\Csv\Application\CsvToJson;
